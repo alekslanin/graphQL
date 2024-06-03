@@ -1,0 +1,25 @@
+wino:
+  request-mapping: ny/wino/v1
+  preload: false
+  photo:
+    location: D:\MyPictures
+
+server:
+  port: 8091
+
+spring:
+  application:
+    name: wino-club-search
+    version: 0.0.0-SNAPSHOT
+    id: 10304
+    org: lanina
+
+  h2:
+    console:
+      enabled: true
+#      path: /h2-console
+#      settings.trace: false
+#      settings.web-allow-other: false
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1

@@ -1,0 +1,47 @@
+type Query {
+	# test gql query
+	firstQuery: String
+
+	# test gql query with arguments
+	secondQuery(firstName: String!, lastName: String): String
+
+	#locations
+	# getAllLocations: [LocationResponse]
+	getAllLocations(filter: MemberType): [LocationResponse]
+
+}
+
+enum MemberType {
+	WINE
+	TRAIL
+	OTHER
+}
+
+type LocationResponse {
+    year: String
+    title: String!
+    country: String
+    total: String!
+    actors: String
+    type: MemberType
+    regionDetailsData: [LocationDetailsResponse]
+}
+
+interface LocationDetailsResponse {
+    region: String!
+}
+
+type WineData implements LocationDetailsResponse {
+    region: String!
+    wine: String
+}
+
+type TrailData implements LocationDetailsResponse {
+    region: String!
+    trail: String
+}
+
+type OtherData implements LocationDetailsResponse {
+    region: String!
+    other: String
+}
