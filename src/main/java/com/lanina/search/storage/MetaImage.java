@@ -1,5 +1,6 @@
-package com.lanina.search;
+package com.lanina.search.storage;
 
+import com.lanina.search.storage.ImageId;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;

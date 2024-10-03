@@ -1,11 +1,14 @@
-package com.lanina.search;
+package com.lanina.search.services;
 
+import com.lanina.search.data.LocationInput;
+import com.lanina.search.data.PageInput;
+import com.lanina.search.storage.*;
 import lombok.extern.slf4j.Slf4j;
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.NotAcceptableStatusException;
@@ -60,6 +63,11 @@ public class TravelPhotoService implements ITravelPhotoService {
     }
 
     @Override
+    public List<MetaLocation> getPaginatedLocations(PageInput pageInput) {
+        return metaLocationRepository.findAll(PageRequest.of(pageInput.getOffset(), pageInput.getLimit())).toList();
+    }
+
+    @Override
     public Long countLocations() {
         return metaLocationRepository.count();
     }
@@ -93,6 +101,20 @@ public class TravelPhotoService implements ITravelPhotoService {
             }
         }
         return new MetaImage(new ImageId(location, id), null, imageNotFound);
+    }
+
+    @Override
+    public MetaLocation add(LocationInput input) {
+        var metaFile = new MetaFile(Integer.parseInt(input.getYear()), List.of(new String[]{"blah", "blah"}), List.of(new String[]{"blah", "blah"}), List.of(new String[]{"blah", "blah"}), List.of(new String[]{"blah", "blah"}));
+        var meta = new MetaLocation(input.getTitle(), input.getCountry(), null, metaFile);
+        return metaLocationRepository.saveAndFlush(meta);
+    }
+
+    @Override
+    public MetaLocation delete(String title) {
+        var entity = metaLocationRepository.getReferenceById(title);
+        metaLocationRepository.delete(entity);
+        return entity;
     }
 
     @Override

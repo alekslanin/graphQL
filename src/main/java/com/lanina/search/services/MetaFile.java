@@ -1,4 +1,4 @@
-package com.lanina.search;
+package com.lanina.search.services;
 
 import lombok.*;
 

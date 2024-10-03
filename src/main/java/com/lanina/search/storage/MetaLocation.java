@@ -1,5 +1,6 @@
-package com.lanina.search;
+package com.lanina.search.storage;
 
+import com.lanina.search.services.MetaFile;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;

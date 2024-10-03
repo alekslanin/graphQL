@@ -1,7 +1,7 @@
-package com.lanina.search;
+package com.lanina.search.data;
 
 public enum MemberType {
     WINE,
-    TRAIL,
+    BLAH,
     OTHER
 }

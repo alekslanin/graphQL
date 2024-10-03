@@ -1,0 +1,26 @@
+type Mutation {
+	# add a new member
+	addLocation(input: LocationInput!): Response
+	
+	# remove a member
+	removeLocation(title: String!): Response
+}
+
+input LocationInput {
+    year: String!
+    title: String!
+    country: String!
+    total: String
+    actors: String
+}
+
+enum Status {
+	SUCCESS
+	FAILURE
+}
+
+type Response {
+	status: Status!
+    title: String!
+	message: String
+}

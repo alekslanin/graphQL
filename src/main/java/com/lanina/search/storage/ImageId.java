@@ -1,4 +1,4 @@
-package com.lanina.search;
+package com.lanina.search.storage;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

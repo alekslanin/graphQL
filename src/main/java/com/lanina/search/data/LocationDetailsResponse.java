@@ -1,4 +1,4 @@
-package com.lanina.search;
+package com.lanina.search.data;
 
 import lombok.Getter;
 import lombok.Setter;

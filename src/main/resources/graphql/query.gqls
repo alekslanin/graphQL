@@ -1,3 +1,9 @@
+scalar BigDecimal
+scalar Email
+scalar Key
+directive @uppercase(condition: String!) on FIELD_DEFINITION
+scalar CursorString
+
 type Query {
 	# test gql query
 	firstQuery: String
@@ -9,20 +15,27 @@ type Query {
 	# getAllLocations: [LocationResponse]
 	getAllLocations(filter: MemberType): [LocationResponse]
 
+	getLocationByName(filter: MemberType, name: String!): [LocationResponse]
+
+	# get paginated members response
+	getPaginatedLocation(page: PageInput, filter: MemberType): [LocationResponse]
+
+	getPaginatedLocation2(page: PageInput, filter: MemberType): LocationResponseConnection!
 }
 
 enum MemberType {
 	WINE
-	TRAIL
 	OTHER
+	BLAH
 }
 
 type LocationResponse {
     year: String
-    title: String!
+    title: String! @uppercase (condition: "pocono")
     country: String
     total: String!
     actors: String
+    mark: BigDecimal
     type: MemberType
     regionDetailsData: [LocationDetailsResponse]
 }
@@ -36,12 +49,39 @@ type WineData implements LocationDetailsResponse {
     wine: String
 }
 
-type TrailData implements LocationDetailsResponse {
+type BlahData implements LocationDetailsResponse {
     region: String!
-    trail: String
+    blah: String
 }
 
 type OtherData implements LocationDetailsResponse {
     region: String!
     other: String
+}
+
+
+# Pagination
+
+type LocationResponseConnection {
+	pageInfo: PageInfo!
+	edges: [LocationResponseEdge!]!
+}
+
+type PageInfo {
+	startCursor: CursorString
+	endCursor: CursorString
+	hasPreviousPage: Boolean
+	hasNextPage: Boolean
+}
+
+type LocationResponseEdge {
+	node: LocationResponse!
+	cursor: CursorString!
+}
+
+input PageInput {
+	offset: Int
+	limit: Int
+	after: CursorString
+	before: CursorString
 }

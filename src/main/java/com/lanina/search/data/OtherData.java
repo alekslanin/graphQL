@@ -1,4 +1,4 @@
-package com.lanina.search;
+package com.lanina.search.data;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class OtherData extends LocationDetailsResponse {
-    public OtherData(String region, String wine) {
+    public OtherData(String region, String other) {
         this.setRegion(region);
-        this.other = wine;
+        this.other = other;
     }
 
     String other;

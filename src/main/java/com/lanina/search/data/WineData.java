@@ -1,5 +1,6 @@
-package com.lanina.search;
+package com.lanina.search.data;
 
+import com.lanina.search.data.LocationDetailsResponse;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
